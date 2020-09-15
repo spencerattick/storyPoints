@@ -6,15 +6,16 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 
-let pointsOnTicket = 0;
+let pointsOnTicket;
 
 app.post("/storyPointsPost", function(req, res) {
+  pointsOnTicket = 0;
   let properties = req.body.properties;
   res.sendStatus(200);
 
 
   //priority
-  let priorityObj = {
+  const priorityObj = {
     'Urgent': 3,
     'High': 2,
     'Normal': 1
@@ -40,7 +41,7 @@ app.post("/storyPointsPost", function(req, res) {
 
 
   //library
-  let libraryObj = {
+  const libraryObj = {
     'analytics.js': 1,
     'analytics.js_consent_manager': 2,
     'analytics.js_visual_tagger': 1,
@@ -70,6 +71,15 @@ app.post("/storyPointsPost", function(req, res) {
 
   if (libraryObj.hasOwnProperty(properties.library)) {
     pointsOnTicket += libraryObj[properties.library];
+  }
+
+  //topic
+  const topicObj = {
+    //to fill in
+  }
+
+  if (topicObj.hasOwnProperty(properties.topic)) {
+    pointsOnTicket += topicObj[properties.topic];
   }
 
   console.log('library: ', properties.library);
