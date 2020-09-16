@@ -23,14 +23,16 @@ if (pointsRequestData.status !== 'Solved' || pointsRequestData.status !== 'Close
 
 
     for (let assignee in pointsPerAssignee) {
-      //loop through each assignee's nested object
+    //loop through each assignee's nested object
 
       if (Object.keys(pointsPerAssignee[assignee].activeTickets).includes(pointsRequestData.properties.ticketId) && assignee === pointsRequestData.properties.assignee) {
-        //if the ticket number matches one that the assignee already has
+        //if the ticket number matches one that the assignee alread has
 
         pointsPerAssignee[assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
           //update value for that ticket number
 
+        break;
+        
       } else if (Object.keys(pointsPerAssignee[assignee].activeTickets).includes(pointsRequestData.properties.ticketId) && assignee !== pointsRequestData.properties.assignee) {
         //if the ticketid matches someone else
 
@@ -40,8 +42,16 @@ if (pointsRequestData.status !== 'Solved' || pointsRequestData.status !== 'Close
         pointsPerAssignee[pointsRequestData.properties.assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
           //add record of this ticket to a the assignee specified on the ticket
 
+        break;
+
+      } else {
+        // the ticket has not yet been added to the pointsPerAssignee object
+
+        pointsPerAssignee[pointsRequestData.properties.assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
+
+        break;
       }
-    }
+  }
 
         //if ticket exists for this user
 
