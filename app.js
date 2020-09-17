@@ -5,7 +5,12 @@ const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 
-const pointsPerAssignee = {};
+const pointsPerAssignee = {
+    spencer: {
+      totalPoints: 0,
+      activeTickets: {}
+   }
+};
 let pointsRequestData;
 
 
@@ -47,9 +52,18 @@ if (pointsRequestData.status !== 'Solved' || pointsRequestData.status !== 'Close
       } else {
         // the ticket has not yet been added to the pointsPerAssignee object
 
+
+        pointsPerAssignee[pointsRequestData.properties.assignee] = {
+          totalPoints: 0,
+          activeTickets: {}
+        }
+          //need to add object structure for new user
+
         pointsPerAssignee[pointsRequestData.properties.assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
           //adds new ticket to assignee's ticket list
 
+
+console.log('3')
         break;
       }
   }
