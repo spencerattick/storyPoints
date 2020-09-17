@@ -11,6 +11,7 @@ const pointsPerAssignee = {
       activeTickets: {}
    }
 };
+
 let pointsRequestData;
 
 
@@ -18,25 +19,37 @@ app.post("/", function(req, res) {
   pointsRequestData = req.body;
   console.log(req.body);
   res.sendStatus(200);
+
+
+  if (!isTicketClosedOrSolved()) {
+    addTicketIdAndValueToObj();
+    recalculatePointsForAll();
+  }
+
+  console.log("++++++++++++++++++++++++")
+  console.log("++++++++++++++++++++++++")
+
+
+
+  console.log(pointsPerAssignee)
+
 })
 
+function isTicketClosedOrSolved() {
+  return pointsRequestData.properties.status === 'Closed' || pointsRequestData.properties.status === 'Solved';
+}
 
-//add ticket and point value if ticket is not closed
-
-if (pointsRequestData.status !== 'Solved' || pointsRequestData.status !== 'Closed') {
-  //don't execute subsequent logic if ticket is Solved or Closed
-
-
-    for (let assignee in pointsPerAssignee) {
+function addTicketIdAndValueToObj() {
+  for (let assignee in pointsPerAssignee) {
     //loop through each assignee's nested object
 
       if (Object.keys(pointsPerAssignee[assignee].activeTickets).includes(pointsRequestData.properties.ticketId) && assignee === pointsRequestData.properties.assignee) {
-        //if the ticket number matches one that the assignee alread has
+        //if the ticket number matches one that the assignee already has
 
         pointsPerAssignee[assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
           //update value for that ticket number
 
-        break;
+        return pointsPerAssignee;
 
       } else if (Object.keys(pointsPerAssignee[assignee].activeTickets).includes(pointsRequestData.properties.ticketId) && assignee !== pointsRequestData.properties.assignee) {
         //if the ticketid matches someone else
@@ -47,11 +60,10 @@ if (pointsRequestData.status !== 'Solved' || pointsRequestData.status !== 'Close
         pointsPerAssignee[pointsRequestData.properties.assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
           //add record of this ticket to a the assignee specified on the ticket
 
-        break;
+        return pointsPerAssignee;
 
       } else {
         // the ticket has not yet been added to the pointsPerAssignee object
-
 
         pointsPerAssignee[pointsRequestData.properties.assignee] = {
           totalPoints: 0,
@@ -62,61 +74,47 @@ if (pointsRequestData.status !== 'Solved' || pointsRequestData.status !== 'Close
         pointsPerAssignee[pointsRequestData.properties.assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
           //adds new ticket to assignee's ticket list
 
-
-console.log('3')
-        break;
+        return pointsPerAssignee;
       }
   }
+}
 
-
-  //count and reassign total points for all assignees
+function recalculatePointsForAll() {
   for (let assignee in pointsPerAssignee) {
-    let newPointTotal = Object.values(pointsPerAssignee[assignee].activeTickets).reduce(function(total, num) {
-      return total+=num;
-    })
-
+    let newPointTotal;
+    if (Object.values(pointsPerAssignee[assignee].activeTickets).length) {
+      newPointTotal = Object.values(pointsPerAssignee[assignee].activeTickets).reduce(function(total, num) {
+       return total+=num;
+     })
+   } else {
+     newPointTotal = 0;
+   }
     pointsPerAssignee[assignee].totalPoints = newPointTotal;
   }
-
-
-
-
-        //if ticket exists for this user
-
-          //update story point value for it
-
-        //else if it exists for a different user
-
-          //delete it for that user
-
-          //add it and the points for the current user
-
-
-        //recalculate total points for everyone
-
-    //add story points to the person's total IF the points for this ticket haven't already been added
-
-
 }
 
-pointsPerAssignee = {
-  spencer: {
-    totalPoints: 9,
-    activeTickets: {
-      12345: 4,
-      53234: 1,
-      65334: 4
-    }
-  },
-  katie: {
-    totalPoints: 12,
-    activeTickets: {
-      46345: 1,
-      09544: 5,
-      12309: 6
-    }
-  }
-}
+
+
+// pointsPerAssignee = {
+//   spencer: {
+//     totalPoints: 9,
+//     activeTickets: {
+//       12345: 4,
+//       53234: 1,
+//       65334: 4
+//     }
+//   },
+//   katie: {
+//     totalPoints: 12,
+//     activeTickets: {
+//       46345: 1,
+//       09544: 5,
+//       12309: 6
+//     }
+//   }
+// }
+
+
 
 
 
