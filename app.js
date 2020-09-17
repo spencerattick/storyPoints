@@ -15,11 +15,11 @@ app.post("/", function(req, res) {
   res.sendStatus(200);
 })
 
+
+//add ticket and point value if ticket is not closed
+
 if (pointsRequestData.status !== 'Solved' || pointsRequestData.status !== 'Closed') {
   //don't execute subsequent logic if ticket is Solved or Closed
-
-  if (pointsPerAssignee.hasOwnProperty(pointsRequestData.assignee)) {
-    //check to see if this assignee exists
 
 
     for (let assignee in pointsPerAssignee) {
@@ -32,7 +32,7 @@ if (pointsRequestData.status !== 'Solved' || pointsRequestData.status !== 'Close
           //update value for that ticket number
 
         break;
-        
+
       } else if (Object.keys(pointsPerAssignee[assignee].activeTickets).includes(pointsRequestData.properties.ticketId) && assignee !== pointsRequestData.properties.assignee) {
         //if the ticketid matches someone else
 
@@ -48,10 +48,24 @@ if (pointsRequestData.status !== 'Solved' || pointsRequestData.status !== 'Close
         // the ticket has not yet been added to the pointsPerAssignee object
 
         pointsPerAssignee[pointsRequestData.properties.assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
+          //adds new ticket to assignee's ticket list
 
         break;
       }
   }
+
+
+  //count and reassign total points for all assignees
+  for (let assignee in pointsPerAssignee) {
+    let newPointTotal = Object.values(pointsPerAssignee[assignee].activeTickets).reduce(function(total, num) {
+      return total+=num;
+    })
+
+    pointsPerAssignee[assignee].totalPoints = newPointTotal;
+  }
+
+
+
 
         //if ticket exists for this user
 
@@ -68,7 +82,6 @@ if (pointsRequestData.status !== 'Solved' || pointsRequestData.status !== 'Close
 
     //add story points to the person's total IF the points for this ticket haven't already been added
 
-  }
 
 }
 
