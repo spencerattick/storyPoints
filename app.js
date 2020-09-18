@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
+
+app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 
@@ -27,7 +29,7 @@ const pointsPerAssignee = {
 let pointsRequestData;
 
 app.get("/", function(req, res) {
-  res.render("home.ejs", {pointsPerAssignee: pointsPerAssignee});
+  res.render("home", {pointsPerAssignee: pointsPerAssignee});
 })
 
 
@@ -44,7 +46,7 @@ app.post("/", function(req, res) {
   console.log("++++++++++++++++++++++++")
   console.log("++++++++++++++++++++++++")
   console.log(pointsPerAssignee)
-  res.render("home.ejs", {pointsPerAssignee: pointsPerAssignee});
+  res.render("home", {pointsPerAssignee: pointsPerAssignee});
   // res.sendStatus(200);
 
 
