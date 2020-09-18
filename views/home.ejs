@@ -1,3 +1,11 @@
-<h1>View work? </h1>
+<h2>Story Points Breakdown: </h2>
 
-<h2>Object: <%= pointsPerAssignee.spencer.totalPoints%></h2>
+<% for (let assignee in pointsPerAssignee) { %>
+  <p> <strong>Name:</strong> <%=assignee%></p>
+  <p><strong>Total Points:</strong> <%=pointsPerAssignee[assignee].totalPoints%></p>
+  <p>_______________</p>
+  <% for (let ticket in pointsPerAssignee[assignee].activeTickets) { %>
+    <p><strong><%=ticket%> : </strong><%=pointsPerAssignee[assignee].activeTickets[ticket]%></p>
+<%  } %>
+  <p>____________________________________________________________________________________</p>
+<% } %>

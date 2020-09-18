@@ -34,7 +34,6 @@ app.get("/", function(req, res) {
 app.post("/", function(req, res) {
   pointsRequestData = req.body;
   console.log(req.body);
-  res.sendStatus(200);
 
 
   if (!isTicketClosedOrSolved()) {
@@ -45,6 +44,10 @@ app.post("/", function(req, res) {
   console.log("++++++++++++++++++++++++")
   console.log("++++++++++++++++++++++++")
   console.log(pointsPerAssignee)
+  res.render("home.ejs", {pointsPerAssignee: pointsPerAssignee});
+  // res.sendStatus(200);
+
+
 
 })
 
