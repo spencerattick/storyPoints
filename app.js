@@ -6,13 +6,29 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 
 const pointsPerAssignee = {
-    spencer: {
-      totalPoints: 0,
-      activeTickets: {}
-   }
-};
+  spencer: {
+    totalPoints: 9,
+    activeTickets: {
+      12345: 4,
+      53234: 1,
+      65334: 4
+    }
+  },
+  katie: {
+    totalPoints: 12,
+    activeTickets: {
+      46345: 1,
+      09544: 5,
+      12309: 6
+    }
+  }
+}
 
 let pointsRequestData;
+
+app.get("/", function(req, res) {
+  res.render("home.ejs", {pointsPerAssignee: pointsPerAssignee});
+})
 
 
 app.post("/", function(req, res) {
@@ -28,9 +44,6 @@ app.post("/", function(req, res) {
 
   console.log("++++++++++++++++++++++++")
   console.log("++++++++++++++++++++++++")
-
-
-
   console.log(pointsPerAssignee)
 
 })
