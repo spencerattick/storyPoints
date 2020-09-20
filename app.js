@@ -64,8 +64,6 @@ function addTicketIdAndValueToObj() {
 
         pointsPerAssignee[assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
           //update value for that ticket number
-        console.log('FIRST BLOCK')
-        // return pointsPerAssignee;
 
       } else if (Object.keys(pointsPerAssignee[assignee].activeTickets).includes(pointsRequestData.properties.ticketId) && assignee !== pointsRequestData.properties.assignee) {
         //if the ticketid matches someone else
@@ -76,10 +74,11 @@ function addTicketIdAndValueToObj() {
         pointsPerAssignee[pointsRequestData.properties.assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
           //add record of this ticket to a the assignee specified on the ticket
 
-        console.log('SECOND BLOCK')
-        // return pointsPerAssignee;
+      } else if (assignee === pointsRequestData.properties.assignee) {
 
-      } else {
+        pointsPerAssignee[pointsRequestData.properties.assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
+
+      } else if (!Object.keys(pointsPerAssignee).includes(pointsRequestData.properties.assignee)) {
         // the ticket has not yet been added to the pointsPerAssignee object
 
         pointsPerAssignee[pointsRequestData.properties.assignee] = {
@@ -91,8 +90,6 @@ function addTicketIdAndValueToObj() {
         pointsPerAssignee[pointsRequestData.properties.assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
           //adds new ticket to assignee's ticket list
 
-        console.log('THIRD BLOCK')
-        // return pointsPerAssignee;
       }
   }
 }
