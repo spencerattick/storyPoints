@@ -5,7 +5,7 @@ const app = express();
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 const pointsPerAssignee = {
   spencer: {
@@ -33,7 +33,7 @@ app.get("/", function(req, res) {
 })
 
 
-app.post("/", function(req, res) {
+app.post("/addNewPoints", function(req, res) {
   pointsRequestData = req.body;
   console.log(req.body);
 
@@ -46,10 +46,8 @@ app.post("/", function(req, res) {
   console.log("++++++++++++++++++++++++")
   console.log("++++++++++++++++++++++++")
   console.log(pointsPerAssignee)
-  res.render("home", {pointsPerAssignee: pointsPerAssignee});
+  res.redirect("/");
   // res.sendStatus(200);
-
-
 
 })
 
@@ -66,8 +64,8 @@ function addTicketIdAndValueToObj() {
 
         pointsPerAssignee[assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
           //update value for that ticket number
-
-        return pointsPerAssignee;
+        console.log('FIRST BLOCK')
+        // return pointsPerAssignee;
 
       } else if (Object.keys(pointsPerAssignee[assignee].activeTickets).includes(pointsRequestData.properties.ticketId) && assignee !== pointsRequestData.properties.assignee) {
         //if the ticketid matches someone else
@@ -78,7 +76,8 @@ function addTicketIdAndValueToObj() {
         pointsPerAssignee[pointsRequestData.properties.assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
           //add record of this ticket to a the assignee specified on the ticket
 
-        return pointsPerAssignee;
+        console.log('SECOND BLOCK')
+        // return pointsPerAssignee;
 
       } else {
         // the ticket has not yet been added to the pointsPerAssignee object
@@ -92,7 +91,8 @@ function addTicketIdAndValueToObj() {
         pointsPerAssignee[pointsRequestData.properties.assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
           //adds new ticket to assignee's ticket list
 
-        return pointsPerAssignee;
+        console.log('THIRD BLOCK')
+        // return pointsPerAssignee;
       }
   }
 }

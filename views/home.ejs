@@ -1,11 +1,25 @@
-<h2>Story Points Breakdown: </h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
 
-<% for (let assignee in pointsPerAssignee) { %>
-  <p> <strong>Name:</strong> <%=assignee%></p>
-  <p><strong>Total Points:</strong> <%=pointsPerAssignee[assignee].totalPoints%></p>
-  <p>_______________</p>
-  <% for (let ticket in pointsPerAssignee[assignee].activeTickets) { %>
-    <p><strong><%=ticket%> : </strong><%=pointsPerAssignee[assignee].activeTickets[ticket]%></p>
-<%  } %>
-  <p>____________________________________________________________________________________</p>
-<% } %>
+  <h1>Story Points Breakdown: </h1>
+
+  <% for (let assignee in pointsPerAssignee) { %>
+    <h2> <strong>Name:</strong> <%=assignee%></h2>
+    <p><strong>Total Points:</strong> <%=pointsPerAssignee[assignee].totalPoints%></p>
+    <p>_______________</p>
+    <% for (let ticket in pointsPerAssignee[assignee].activeTickets) { %>
+      <p><strong><%=ticket%> : </strong><%=pointsPerAssignee[assignee].activeTickets[ticket]%></p>
+  <%  } %>
+    <p>____________________________________________________________________________________</p>
+  <% } %>
+
+
+</body>
+</html>
