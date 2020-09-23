@@ -29,6 +29,7 @@
   </style>
 
   <script src="https://kit.fontawesome.com/2b36c518bf.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 </head>
 <body>
@@ -42,18 +43,33 @@
       <p id="totalPoints"><strong>Total Points:</strong> <%=pointsPerAssignee[assignee].totalPoints%>
         <i class="fa fa-angle-up" id="arrowIcon" aria-hidden="true"></i>
       </p>
-      <% for (let ticket in pointsPerAssignee[assignee].activeTickets) { %>
-        <p><strong><%=ticket%> : </strong><%=pointsPerAssignee[assignee].activeTickets[ticket]%></p>
-    <%  } %>
-    <% } %>
-  </div>
+      <div class="card" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+          <% for (let ticket in pointsPerAssignee[assignee].activeTickets) { %>
+             <li id="toHide"><strong><%=ticket%> : </strong><%=pointsPerAssignee[assignee].activeTickets[ticket]%></li>
+          <%  } %>
+          <% } %>
+        </ul>
+      </div>
 
+  </div>
 
 </body>
 <script>
-  document.getElementById("arrowIcon").addEventListener("click", function() {
-    console.log("clicked!");
-    document.getElementById("arrowIcon").className = "fa fa-angle-right";
-  })
+
+    document.getElementById("arrowIcon").addEventListener("click", function() {
+      console.log("clicked!");
+      if (document.getElementById("arrowIcon").className === "fa fa-angle-right") {
+        document.getElementById("arrowIcon").className = "fa fa-angle-up";
+        document.getElementsByClassName("card")[0].style.visibility = "visible";
+
+      } else {
+        document.getElementById("arrowIcon").className = "fa fa-angle-right";
+        document.getElementsByClassName("card")[0].style.visibility = "hidden";
+      }
+    })
+
+
+
 </script>
 </html>

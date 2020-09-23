@@ -53,7 +53,7 @@ function addTicketIdAndValueToObj() {
         pointsPerAssignee[assignee].activeTickets[pointsRequestData.properties.ticketId] = pointsRequestData.properties.pointsOnTicket;
           //update value for that ticket number
 
-      } else if (Object.keys(pointsPerAssignee[assignee].activeTickets).includes(pointsRequestData.properties.ticketId) && assignee !== pointsRequestData.properties.assignee) {
+      } else if (Object.keys(pointsPerAssignee[assignee].activeTickets).includes(pointsRequestData.properties.ticketId) && assignee !== pointsRequestData.properties.assignee && Object.keys(pointsPerAssignee).includes(assignee)) {
         //if the ticketid matches someone else
 
         delete pointsPerAssignee[assignee].activeTickets[pointsRequestData.properties.ticketId];
