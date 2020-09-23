@@ -9,8 +9,18 @@ app.use(bodyParser.json());
 
 const pointsPerAssignee = {
   'Spencer Attick': {
-    totalPoints: 0,
-    activeTickets: {}
+    totalPoints: 5,
+    activeTickets: {
+      '12345': 3,
+      '45673': 2
+    }
+  },
+  'Katie Noonan': {
+    totalPoints: 6,
+    activeTickets: {
+      '67893': 1,
+      '54687': 5
+    }
   }
 }
 
