@@ -57,37 +57,33 @@
 
 </body>
 <script>
-//for loop to catch all instances of arrowIcon?
+
+// function hideTickets(index) {
+//   console.log(index)
+//     if (document.getElementsByClassName("fa")[index].className === "fa fa-angle-up") {
+//       document.getElementsByClassName("fa")[index].className = "fa fa-angle-right";
+//       document.getElementsByClassName("list-group")[index].style.display = "inline";
+//       // console.log(i)
+//
+//     } else {
+//       document.getElementsByClassName("fa")[index].className = "fa fa-angle-up";
+//       document.getElementsByClassName("list-group")[index].style.display = "none";
+//     }
+// }
+
+
 function hideTickets(index) {
   console.log(index)
-    if (document.getElementById("arrowIcon").className === "fa fa-angle-right") {
-      document.getElementById("arrowIcon").className = "fa fa-angle-up";
-      document.getElementsByClassName("list-group")[index].style.visibility = "visible";
+    if (document.getElementsByClassName("fa")[index].className === "fa fa-angle-up") {
+      document.getElementsByClassName("fa")[index].className = "fa fa-angle-right";
+      document.getElementsByClassName("list-group")[index].style.display = "none";
       // console.log(i)
 
     } else {
-      document.getElementById("arrowIcon").className = "fa fa-angle-right";
-      document.getElementsByClassName("list-group")[index].style.visibility = "hidden";
+      document.getElementsByClassName("fa")[index].className = "fa fa-angle-up";
+      document.getElementsByClassName("list-group")[index].style.display = "inline";
     }
 }
-
-    // document.getElementById("arrowIcon").addEventListener("click", function() {
-      // console.log("clicked!");
-    //   if (document.getElementById("arrowIcon").className === "fa fa-angle-right") {
-    //     document.getElementById("arrowIcon").className = "fa fa-angle-up";
-    //     document.getElementsByClassName("list-group")[i].style.visibility = "visible";
-    //     console.log(i)
-    //
-    //   } else {
-    //     document.getElementById("arrowIcon").className = "fa fa-angle-right";
-    //     document.getElementsByClassName("list-group")[i].style.visibility = "hidden";
-      // }
-    // })
-
-
-
-
-
 
 </script>
 </html>
