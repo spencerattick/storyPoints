@@ -29,6 +29,16 @@
     #toHide {
       display: none;
     }
+    li {
+      list-style-type: none;
+    }
+    h2 {
+      padding: 2%;
+    }
+    a {
+      text-decoration:none;
+      cursor: pointer;
+    }
   </style>
 
   <script src="https://kit.fontawesome.com/2b36c518bf.js" crossorigin="anonymous"></script>
@@ -50,7 +60,7 @@
       <!-- <div class="card" style="width: 18rem;"> -->
         <ul id="toHide" class="list-group list-group-flush">
           <% for (let ticket in pointsPerAssignee[assignee].activeTickets) { %>
-             <li ><strong><%=ticket%> : </strong><%=pointsPerAssignee[assignee].activeTickets[ticket]%></li>
+             <li> <a href="https://spencer-test.zendesk.com/agent/tickets/<%=Number(ticket)%>" target=”_blank”><strong><%=ticket%> : </strong><%=pointsPerAssignee[assignee].activeTickets[ticket]%></a></li>
           <%  } %>
         </ul>
       <!-- </div> -->
@@ -61,26 +71,11 @@
 </body>
 <script>
 
-// function hideTickets(index) {
-//   console.log(index)
-//     if (document.getElementsByClassName("fa")[index].className === "fa fa-angle-up") {
-//       document.getElementsByClassName("fa")[index].className = "fa fa-angle-right";
-//       document.getElementsByClassName("list-group")[index].style.display = "inline";
-//       // console.log(i)
-//
-//     } else {
-//       document.getElementsByClassName("fa")[index].className = "fa fa-angle-up";
-//       document.getElementsByClassName("list-group")[index].style.display = "none";
-//     }
-// }
-
 
 function hideTickets(index) {
-  console.log(index)
     if (document.getElementsByClassName("fa")[index].className === "fa fa-angle-up") {
       document.getElementsByClassName("fa")[index].className = "fa fa-angle-right";
       document.getElementsByClassName("list-group")[index].style.display = "inline";
-      // console.log(i)
 
     } else {
       document.getElementsByClassName("fa")[index].className = "fa fa-angle-up";

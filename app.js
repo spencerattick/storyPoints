@@ -9,17 +9,8 @@ app.use(bodyParser.json());
 
 const pointsPerAssignee = {
   'Spencer Attick': {
-    totalPoints: 5,
+    totalPoints: 0,
     activeTickets: {
-      '12345': 3,
-      '45673': 2
-    }
-  },
-  'Katie Noonan': {
-    totalPoints: 6,
-    activeTickets: {
-      '67893': 1,
-      '54687': 5
     }
   }
 }
@@ -39,12 +30,15 @@ app.post("/addNewPoints", function(req, res) {
   if (!isTicketClosedOrSolved()) {
     addTicketIdAndValueToObj();
     recalculatePointsForAll();
+
+    res.redirect(req.get('/'));
+
   }
 
   console.log("++++++++++++++++++++++++")
   console.log("++++++++++++++++++++++++")
   console.log(pointsPerAssignee)
-  res.redirect("/");
+  // res.redirect("/");
   // res.sendStatus(200);
 
 })
