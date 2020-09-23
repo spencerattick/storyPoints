@@ -8,21 +8,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 const pointsPerAssignee = {
-  spencer: {
-    totalPoints: 9,
-    activeTickets: {
-      12345: 4,
-      53234: 1,
-      65334: 4
-    }
-  },
-  katie: {
-    totalPoints: 12,
-    activeTickets: {
-      46345: 1,
-      09544: 5,
-      12309: 6
-    }
+  'Spencer Attick': {
+    totalPoints: 0,
+    activeTickets: {}
   }
 }
 

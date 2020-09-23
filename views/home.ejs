@@ -13,7 +13,7 @@
       width: 70%;
       margin: auto;
       padding: 5%;
-      border-radius: 2%;
+      border-radius: 5%;
       color: #51B68C;
     }
     h1 {
@@ -27,6 +27,15 @@
       margin-left: 2%;
     }
   </style>
+
+  <script>
+    // document.getElementsByClassName("fa")[0].addEventListener("click", function() {
+    //   console.log("34tet43t")
+    // })
+    console.log(document.getElementsByClassName("fa")[0], "classssss")
+  </script>
+  <script src="https://kit.fontawesome.com/2b36c518bf.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
@@ -36,12 +45,12 @@
   <div class="container">
     <% for (let assignee in pointsPerAssignee) { %>
       <h2> <strong><%=assignee%></strong></h2>
-      <p class="totalPoints"><strong>Total Points:</strong> <%=pointsPerAssignee[assignee].totalPoints%></p>
-      <p>_______________</p>
+      <p id="totalPoints"><strong>Total Points:</strong> <%=pointsPerAssignee[assignee].totalPoints%>
+        <i class="fa fa-angle-up" aria-hidden="true"></i>
+      </p>
       <% for (let ticket in pointsPerAssignee[assignee].activeTickets) { %>
         <p><strong><%=ticket%> : </strong><%=pointsPerAssignee[assignee].activeTickets[ticket]%></p>
     <%  } %>
-      <p>__________________________________________________________________</p>
     <% } %>
   </div>
 
