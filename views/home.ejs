@@ -28,12 +28,6 @@
     }
   </style>
 
-  <script>
-    // document.getElementsByClassName("fa")[0].addEventListener("click", function() {
-    //   console.log("34tet43t")
-    // })
-    console.log(document.getElementsByClassName("fa")[0], "classssss")
-  </script>
   <script src="https://kit.fontawesome.com/2b36c518bf.js" crossorigin="anonymous"></script>
 
 </head>
@@ -46,7 +40,7 @@
     <% for (let assignee in pointsPerAssignee) { %>
       <h2> <strong><%=assignee%></strong></h2>
       <p id="totalPoints"><strong>Total Points:</strong> <%=pointsPerAssignee[assignee].totalPoints%>
-        <i class="fa fa-angle-up" aria-hidden="true"></i>
+        <i class="fa fa-angle-up" id="arrowIcon" aria-hidden="true"></i>
       </p>
       <% for (let ticket in pointsPerAssignee[assignee].activeTickets) { %>
         <p><strong><%=ticket%> : </strong><%=pointsPerAssignee[assignee].activeTickets[ticket]%></p>
@@ -56,4 +50,10 @@
 
 
 </body>
+<script>
+  document.getElementById("arrowIcon").addEventListener("click", function() {
+    console.log("clicked!");
+    document.getElementById("arrowIcon").className = "fa fa-angle-right";
+  })
+</script>
 </html>
