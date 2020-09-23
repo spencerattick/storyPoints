@@ -13,15 +13,12 @@
       width: 70%;
       margin: auto;
       padding: 5%;
-      border-radius: 5%;
+      border-radius: 30px;
       color: #51B68C;
     }
     h1 {
       text-align: center;
       color: #234362;
-    }
-    body {
-      /* background-color: #51B68C; */
     }
     .totalPoints {
       margin-left: 2%;
@@ -39,6 +36,10 @@
       text-decoration:none;
       cursor: pointer;
     }
+    #badge {
+      background-color: black;
+      color: white;
+    }
   </style>
 
   <script src="https://kit.fontawesome.com/2b36c518bf.js" crossorigin="anonymous"></script>
@@ -53,20 +54,39 @@
   <div class="container-not-bootstrap">
 
     <% for (let assignee in pointsPerAssignee) { %>
-      <h2> <strong><%=assignee%></strong></h2>
-      <p id="totalPoints"><strong>Total Points:</strong> <%=pointsPerAssignee[assignee].totalPoints%>
-        <i onclick="hideTickets(<%=Object.keys(pointsPerAssignee).indexOf(assignee)%>)" class="fa fa-angle-up" id="arrowIcon" aria-hidden="true"></i>
-      </p>
-      <!-- <div class="card" style="width: 18rem;"> -->
+
+      <h2>
+        <%=assignee%>
+        <span class="badge badge-dark" id="badge">
+          <%=pointsPerAssignee[assignee].totalPoints%>
+        </span>
+        <i onclick="hideTickets(<%=Object.keys(pointsPerAssignee).indexOf(assignee)%>)" class="fa fa-angle-up" aria-hidden="true"></i>
+      </h2>
+
         <ul id="toHide" class="list-group list-group-flush">
           <% for (let ticket in pointsPerAssignee[assignee].activeTickets) { %>
              <li> <a href="https://spencer-test.zendesk.com/agent/tickets/<%=Number(ticket)%>" target=”_blank”><strong><%=ticket%> : </strong><%=pointsPerAssignee[assignee].activeTickets[ticket]%></a></li>
           <%  } %>
         </ul>
-      <!-- </div> -->
       <% } %>
 
   </div>
+
+  <!-- <div class="container-not-bootstrap">
+
+    <% for (let assignee in pointsPerAssignee) { %>
+      <h2> <strong><%=assignee%></strong></h2>
+      <p id="totalPoints"><strong>Total Points:</strong> <%=pointsPerAssignee[assignee].totalPoints%>
+        <i onclick="hideTickets(<%=Object.keys(pointsPerAssignee).indexOf(assignee)%>)" class="fa fa-angle-up" aria-hidden="true"></i>
+      </p>
+        <ul id="toHide" class="list-group list-group-flush">
+          <% for (let ticket in pointsPerAssignee[assignee].activeTickets) { %>
+             <li> <a href="https://spencer-test.zendesk.com/agent/tickets/<%=Number(ticket)%>" target=”_blank”><strong><%=ticket%> : </strong><%=pointsPerAssignee[assignee].activeTickets[ticket]%></a></li>
+          <%  } %>
+        </ul>
+      <% } %>
+
+  </div> -->
 
 </body>
 <script>
